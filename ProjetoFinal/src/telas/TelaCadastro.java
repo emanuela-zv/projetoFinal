@@ -10,9 +10,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastro extends JFrame {
 
@@ -20,6 +24,7 @@ public class TelaCadastro extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfAutor;
+	private JTextField tfAnoLanc;
 
 	/**
 	 * Launch the application.
@@ -42,7 +47,7 @@ public class TelaCadastro extends JFrame {
 	 */
 	public TelaCadastro() {
 		setTitle("Cadastro do livro");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +58,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nome: ");
-		lblNewLabel.setFont(new Font("Courier New", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Courier New", Font.BOLD, 15));
 		lblNewLabel.setBounds(25, 35, 62, 14);
 		contentPane.add(lblNewLabel);
 		
@@ -64,7 +69,7 @@ public class TelaCadastro extends JFrame {
 		tfNome.setColumns(10);
 		
 		JLabel lbAutor = new JLabel("Autor:");
-		lbAutor.setFont(new Font("Courier New", Font.PLAIN, 15));
+		lbAutor.setFont(new Font("Courier New", Font.BOLD, 15));
 		lbAutor.setBounds(25, 70, 62, 14);
 		contentPane.add(lbAutor);
 		
@@ -72,60 +77,89 @@ public class TelaCadastro extends JFrame {
 		tfAutor.setFont(new Font("Courier New", Font.PLAIN, 15));
 		tfAutor.setColumns(10);
 		tfAutor.setBounds(85, 67, 476, 20);
-		contentPane.add(tfAutor);
+		contentPane.add(tfAutor); 
 		
 		JComboBox cbIdade = new JComboBox();
 		cbIdade.setModel(new DefaultComboBoxModel(new String[] {"Livre", "+ de 12 anos", "+ de 14 anos", "+ de 16 anos", "+ de 18 anos"}));
 		cbIdade.setFont(new Font("Courier New", Font.PLAIN, 15));
 		cbIdade.setToolTipText("Idade Recomendada");
-		cbIdade.setBounds(43, 165, 159, 22);
+		cbIdade.setBounds(51, 247, 141, 22);
 		contentPane.add(cbIdade);
 		
-		JLabel lbClassificacaoIndicativa = new JLabel("<html>Classificação    <br/>   Indicativa<html>"); // usado para conseguir fazer a parte de "Indicativa" ir para a linha de baixo
-		lbClassificacaoIndicativa.setFont(new Font("Courier New", Font.PLAIN, 15));
-		lbClassificacaoIndicativa.setBounds(42, 109, 129, 50);
+		JLabel lbClassificacaoIndicativa = new JLabel("Classificação");
+		lbClassificacaoIndicativa.setFont(new Font("Courier New", Font.BOLD, 15));
+		lbClassificacaoIndicativa.setBounds(63, 162, 129, 50);
 		contentPane.add(lbClassificacaoIndicativa);
 		
-		JRadioButton rbRomance = new JRadioButton("Romance");
-		rbRomance.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbRomance.setForeground(new Color(0, 0, 0));
-		rbRomance.setBounds(24, 250, 109, 23);
-		contentPane.add(rbRomance);
+		JRadioButton rbLido = new JRadioButton("Lido");
+		rbLido.setFont(new Font("Courier New", Font.PLAIN, 15));
+		rbLido.setForeground(new Color(0, 0, 0));
+		rbLido.setBounds(288, 206, 75, 23);
+		contentPane.add(rbLido);
 		
-		JRadioButton rbConto = new JRadioButton("Conto");
-		rbConto.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbConto.setBounds(182, 250, 87, 23);
-		contentPane.add(rbConto);
+		JRadioButton rbLendo = new JRadioButton("Lendo");
+		rbLendo.setFont(new Font("Courier New", Font.PLAIN, 15));
+		rbLendo.setBounds(288, 247, 75, 23);
+		contentPane.add(rbLendo);
 		
-		JRadioButton rbPoesia = new JRadioButton("Poesia");
-		rbPoesia.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbPoesia.setBounds(329, 250, 87, 23);
-		contentPane.add(rbPoesia);
+		JRadioButton rbAbandonado = new JRadioButton("Abandonado");
+		rbAbandonado.setFont(new Font("Courier New", Font.PLAIN, 15));
+		rbAbandonado.setBounds(419, 247, 129, 23);
+		contentPane.add(rbAbandonado);
 		
-		JRadioButton rbCronica = new JRadioButton("Crônica");
-		rbCronica.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbCronica.setBounds(475, 250, 92, 23);
-		contentPane.add(rbCronica);
+		JRadioButton rbQueroLer = new JRadioButton("Quero ler");
+		rbQueroLer.setFont(new Font("Courier New", Font.PLAIN, 15));
+		rbQueroLer.setBounds(419, 206, 129, 23);
+		contentPane.add(rbQueroLer);
 		
-		JLabel lblNewLabel_1 = new JLabel("Gênero Textual");
-		lblNewLabel_1.setFont(new Font("Courier New", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(221, 212, 129, 14);
+		JLabel lblNewLabel_1 = new JLabel("Status da leitura");
+		lblNewLabel_1.setFont(new Font("Courier New", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(327, 162, 167, 14);
 		contentPane.add(lblNewLabel_1);
+			
+		ButtonGroup statusLeitura = new ButtonGroup();
 		
-		JLabel lblGnero = new JLabel("Gênero");
-		lblGnero.setFont(new Font("Courier New", Font.PLAIN, 15));
-		lblGnero.setBounds(362, 113, 68, 43);
-		contentPane.add(lblGnero);
+		statusLeitura.add(rbQueroLer);
+		statusLeitura.add(rbAbandonado);
+		statusLeitura.add(rbLendo);
+		statusLeitura.add(rbLido);
 		
-		JRadioButton rbFiccao = new JRadioButton("Ficção");
-		rbFiccao.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbFiccao.setBounds(291, 165, 87, 23);
-		contentPane.add(rbFiccao);
+		JButton btCadastrar = new JButton("CADASTRAR");
+		btCadastrar.setFont(new Font("Courier New", Font.BOLD, 11));
+		btCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btCadastrar.setBounds(348, 312, 153, 29);
+		contentPane.add(btCadastrar);
 		
-		JRadioButton rbNaoFiccao = new JRadioButton("Não Ficção");
-		rbNaoFiccao.setFont(new Font("Courier New", Font.PLAIN, 15));
-		rbNaoFiccao.setBounds(402, 163, 141, 23);
-		contentPane.add(rbNaoFiccao);
+		JLabel lblAnoDeLanamento = new JLabel("Ano de lançamento: ");
+		lblAnoDeLanamento.setFont(new Font("Courier New", Font.BOLD, 15));
+		lblAnoDeLanamento.setBounds(25, 105, 245, 14);
+		contentPane.add(lblAnoDeLanamento);
+		
+		JLabel lblIndicativa = new JLabel("Indicativa");
+		lblIndicativa.setFont(new Font("Courier New", Font.BOLD, 15));
+		lblIndicativa.setBounds(73, 192, 97, 50);
+		contentPane.add(lblIndicativa);
+		
+		tfAnoLanc = new JTextField();
+		tfAnoLanc.setFont(new Font("Courier New", Font.PLAIN, 15));
+		tfAnoLanc.setColumns(10);
+		tfAnoLanc.setBounds(197, 102, 364, 20);
+		contentPane.add(tfAnoLanc);
+		
+		JButton btVoltar = new JButton("VOLTAR");
+		btVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Tela1 tela1 = new Tela1();
+				tela1.setVisible(true);
+			}
+		});
+		btVoltar.setFont(new Font("Courier New", Font.BOLD, 11));
+		btVoltar.setBounds(85, 312, 153, 29);
+		contentPane.add(btVoltar);
 
 	}
 }
