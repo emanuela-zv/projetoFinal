@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -19,8 +20,8 @@ public class TabelaLivros extends JFrame {
 	private JPanel contentPane;
 	private JTable tabela;
 	
-	private DefaultTableModel modeloTabela;	
-
+	protected DefaultTableModel modeloTabela;	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -56,14 +57,14 @@ public class TabelaLivros extends JFrame {
 		contentPane.add(scrollPane);
 		
 		tabela = new JTable();
-		scrollPane.setColumnHeaderView(tabela);
-		
+		scrollPane.setColumnHeaderView(tabela);		
 		
 		tabela.setModel(new DefaultTableModel(new Object[][] {}, new String[] 
 				{"Nome", "Autor", "Ano", "Idade", "Status de leitura"}));
 		tabela.setToolTipText("");
 		tabela.setFont(new Font("Courier New", Font.PLAIN, 12));
-		scrollPane.setViewportView(tabela);
+		scrollPane.setViewportView(tabela);	
+		
 		
 		JButton btEditar = new JButton("Editar");
 		btEditar.setFont(new Font("Courier New", Font.BOLD, 15));
@@ -71,6 +72,19 @@ public class TabelaLivros extends JFrame {
 		contentPane.add(btEditar);
 		
 		JButton btExcluir = new JButton("Excluir");
+		btExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int linhaSelecionada = tabela.getSelectedRow();
+
+				if (linhaSelecionada >= 0) {
+
+					modeloTabela.removeRow(linhaSelecionada);
+				} else {
+					JOptionPane.showMessageDialog(null, "Caso queira excluir uma linha, selecione ela!");
+				}
+			}
+		});
 		btExcluir.setFont(new Font("Courier New", Font.BOLD, 15));
 		btExcluir.setBounds(399, 326, 120, 23);
 		contentPane.add(btExcluir);
@@ -94,6 +108,9 @@ public class TabelaLivros extends JFrame {
 		
 		
 		
+		
+		
 
 	}
+
 }

@@ -22,10 +22,12 @@ public class TelaCadastro extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfNome;
+	private JTextField tfTitulo;
 	private JTextField tfAutor;
 	private JTextField tfAnoLanc;
-
+	private int linhaAlteracao = -1;
+	private TabelaLivros tabelaLivros;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -33,8 +35,13 @@ public class TelaCadastro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					TabelaLivros tabelaLivros = new TabelaLivros();
+					
 					TelaCadastro frame = new TelaCadastro();
+								
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,16 +64,16 @@ public class TelaCadastro extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nome: ");
+		JLabel lblNewLabel = new JLabel("Titulo:");
 		lblNewLabel.setFont(new Font("Courier New", Font.BOLD, 15));
-		lblNewLabel.setBounds(25, 35, 62, 14);
+		lblNewLabel.setBounds(25, 35, 97, 14);
 		contentPane.add(lblNewLabel);
 		
-		tfNome = new JTextField();
-		tfNome.setFont(new Font("Courier New", Font.PLAIN, 15));
-		tfNome.setBounds(85, 32, 476, 20);
-		contentPane.add(tfNome);
-		tfNome.setColumns(10);
+		tfTitulo = new JTextField();
+		tfTitulo.setFont(new Font("Courier New", Font.PLAIN, 15));
+		tfTitulo.setBounds(97, 32, 464, 20);
+		contentPane.add(tfTitulo);
+		tfTitulo.setColumns(10);
 		
 		JLabel lbAutor = new JLabel("Autor:");
 		lbAutor.setFont(new Font("Courier New", Font.BOLD, 15));
@@ -76,7 +83,7 @@ public class TelaCadastro extends JFrame {
 		tfAutor = new JTextField();
 		tfAutor.setFont(new Font("Courier New", Font.PLAIN, 15));
 		tfAutor.setColumns(10);
-		tfAutor.setBounds(85, 67, 476, 20);
+		tfAutor.setBounds(97, 67, 464, 20);
 		contentPane.add(tfAutor); 
 		
 		JComboBox cbIdade = new JComboBox();
@@ -128,15 +135,40 @@ public class TelaCadastro extends JFrame {
 		btCadastrar.setFont(new Font("Courier New", Font.BOLD, 11));
 		btCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			String titulo = tfTitulo.getText().trim();
+			String autor = tfAutor.getText().trim();
+			String anoLanc = tfAnoLanc.getText().trim();
+			String status = "";
+			
+									
+			if (rbLido.isSelected()) {
+				status = rbLido.getText();				
+			}
+			if (rbLendo.isSelected()) {
+				status = rbLendo.getText();
+			}
+			if (rbAbandonado.isSelected()) {
+				status = rbAbandonado.getText();
+			}
+			if (rbQueroLer.isSelected()) {
+				status = rbQueroLer.getText();
+			}
+
+				
+			
+			
+				
 			}
 		});
-		btCadastrar.setBounds(348, 312, 153, 29);
+		
+		btCadastrar.setBounds(218, 312, 153, 29);
 		contentPane.add(btCadastrar);
 		
-		JLabel lblAnoDeLanamento = new JLabel("Ano de lançamento: ");
-		lblAnoDeLanamento.setFont(new Font("Courier New", Font.BOLD, 15));
-		lblAnoDeLanamento.setBounds(25, 105, 245, 14);
-		contentPane.add(lblAnoDeLanamento);
+		JLabel lblAnoDeLancamento = new JLabel("Ano de lançamento: ");
+		lblAnoDeLancamento.setFont(new Font("Courier New", Font.BOLD, 15));
+		lblAnoDeLancamento.setBounds(25, 105, 245, 14);
+		contentPane.add(lblAnoDeLancamento);
 		
 		JLabel lblIndicativa = new JLabel("Indicativa");
 		lblIndicativa.setFont(new Font("Courier New", Font.BOLD, 15));
@@ -155,11 +187,26 @@ public class TelaCadastro extends JFrame {
 				
 				Tela1 tela1 = new Tela1();
 				tela1.setVisible(true);
+				
 			}
 		});
+		
 		btVoltar.setFont(new Font("Courier New", Font.BOLD, 11));
-		btVoltar.setBounds(85, 312, 153, 29);
+		btVoltar.setBounds(25, 312, 153, 29);
 		contentPane.add(btVoltar);
+		
+		JButton btAcessarTab = new JButton("ACESSAR TABELA");
+		btAcessarTab.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				tabelaLivros.setVisible(true);
+				
+			}
+		});
+		
+		btAcessarTab.setFont(new Font("Courier New", Font.BOLD, 11));
+		btAcessarTab.setBounds(408, 312, 153, 29);
+		contentPane.add(btAcessarTab);
 
 	}
 }
