@@ -20,7 +20,7 @@ public class TabelaLivros extends JFrame {
 	private JPanel contentPane;
 	private JTable tabela;
 	
-	protected DefaultTableModel modeloTabela;	
+	private DefaultTableModel modeloTabela;	
 	
 	/**
 	 * Launch the application.
@@ -65,6 +65,8 @@ public class TabelaLivros extends JFrame {
 		tabela.setFont(new Font("Courier New", Font.PLAIN, 12));
 		scrollPane.setViewportView(tabela);	
 		
+		modeloTabela = (DefaultTableModel) tabela.getModel();
+		
 		
 		JButton btEditar = new JButton("Editar");
 		btEditar.setFont(new Font("Courier New", Font.BOLD, 15));
@@ -104,13 +106,12 @@ public class TabelaLivros extends JFrame {
 		
 		tabela.setDefaultEditor(Object.class, null);
 		
-		modeloTabela = (DefaultTableModel) tabela.getModel();
 		
 		
-		
-		
-		
-
 	}
+	public void AdicionarLivros(Object[] infos) {
+		modeloTabela.addRow(infos);
+	}
+	
 
 }

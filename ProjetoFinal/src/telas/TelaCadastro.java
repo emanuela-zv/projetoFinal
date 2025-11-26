@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -17,6 +18,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaCadastro extends JFrame {
 
@@ -27,6 +30,7 @@ public class TelaCadastro extends JFrame {
 	private JTextField tfAnoLanc;
 	private int linhaAlteracao = -1;
 	private TabelaLivros tabelaLivros;
+	private DefaultTableModel modeloTabela;
 	
 	/**
 	 * Launch the application.
@@ -129,42 +133,8 @@ public class TelaCadastro extends JFrame {
 		statusLeitura.add(rbQueroLer);
 		statusLeitura.add(rbAbandonado);
 		statusLeitura.add(rbLendo);
-		statusLeitura.add(rbLido);
-		
-		JButton btCadastrar = new JButton("CADASTRAR");
-		btCadastrar.setFont(new Font("Courier New", Font.BOLD, 11));
-		btCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			String titulo = tfTitulo.getText().trim();
-			String autor = tfAutor.getText().trim();
-			String anoLanc = tfAnoLanc.getText().trim();
-			String status = "";
-			
-									
-			if (rbLido.isSelected()) {
-				status = rbLido.getText();				
-			}
-			if (rbLendo.isSelected()) {
-				status = rbLendo.getText();
-			}
-			if (rbAbandonado.isSelected()) {
-				status = rbAbandonado.getText();
-			}
-			if (rbQueroLer.isSelected()) {
-				status = rbQueroLer.getText();
-			}
+		statusLeitura.add(rbLido);		
 
-				
-			
-			
-				
-			}
-		});
-		
-		btCadastrar.setBounds(218, 312, 153, 29);
-		contentPane.add(btCadastrar);
-		
 		JLabel lblAnoDeLancamento = new JLabel("Ano de lançamento: ");
 		lblAnoDeLancamento.setFont(new Font("Courier New", Font.BOLD, 15));
 		lblAnoDeLancamento.setBounds(25, 105, 245, 14);
@@ -192,7 +162,7 @@ public class TelaCadastro extends JFrame {
 		});
 		
 		btVoltar.setFont(new Font("Courier New", Font.BOLD, 11));
-		btVoltar.setBounds(25, 312, 153, 29);
+		btVoltar.setBounds(25, 319, 153, 29);
 		contentPane.add(btVoltar);
 		
 		JButton btAcessarTab = new JButton("ACESSAR TABELA");
@@ -205,8 +175,45 @@ public class TelaCadastro extends JFrame {
 		});
 		
 		btAcessarTab.setFont(new Font("Courier New", Font.BOLD, 11));
-		btAcessarTab.setBounds(408, 312, 153, 29);
+		btAcessarTab.setBounds(408, 319, 153, 29);
 		contentPane.add(btAcessarTab);
+		
+		TabelaLivros tabelaLivros = new TabelaLivros();
+		
+		JButton btCadastrar = new JButton("CADASTRAR");
+		btCadastrar.setFont(new Font("Courier New", Font.BOLD, 11));
+		btCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			String titulo = tfTitulo.getText().trim();
+			String autor = tfAutor.getText().trim();
+			String anoLanc = tfAnoLanc.getText().trim();
+			String status = "";
+												
+			if (rbLido.isSelected()) {
+				status = rbLido.getText();				
+			}
+			if (rbLendo.isSelected()) {
+				status = rbLendo.getText();
+			}
+			if (rbAbandonado.isSelected()) {
+				status = rbAbandonado.getText();
+			}
+			if (rbQueroLer.isSelected()) {
+				status = rbQueroLer.getText();
+			}
+				
+			Object[] infos = {titulo};
+			
+			tabelaLivros.AdicionarLivros(infos);
+			tabelaLivros.setVisible(true);
+			
+			}
+		});
+		
+		btCadastrar.setBounds(213, 319, 153, 29);
+		contentPane.add(btCadastrar);
+		
 
 	}
 }

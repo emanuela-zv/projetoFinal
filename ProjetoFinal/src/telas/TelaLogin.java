@@ -83,7 +83,7 @@ public class TelaLogin extends JFrame {
 					// getUsuario e getSenha são da classe Usuario
 					
 				//	JOptionPane.showMessageDialog(null, "Acesso Permitido\n" + usuario.getmsg(), "Permitido!!!",1);
-					JOptionPane.showMessageDialog(null, "Acesso Permitido\n", "",1);
+					JOptionPane.showMessageDialog(null, "Acesso Permitido\n", "", 1);
 					
 					Tela1 tela1 = new Tela1();
 					tela1.setVisible(true);
@@ -99,6 +99,7 @@ public class TelaLogin extends JFrame {
 				
 			}
 		});
+		
 		btEntrar.setFont(new Font("Courier New", Font.PLAIN, 15));
 		btEntrar.setBounds(233, 225, 166, 23);
 		contentPane.add(btEntrar);
