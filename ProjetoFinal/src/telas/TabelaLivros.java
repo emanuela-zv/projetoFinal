@@ -19,6 +19,7 @@ public class TabelaLivros extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable tabela;
+	private int linhaAlteracao = -1;
 	
 	private DefaultTableModel modeloTabela;	
 	
@@ -42,6 +43,8 @@ public class TabelaLivros extends JFrame {
 	 * Create the frame.
 	 */
 	public TabelaLivros() {
+		
+		setFont(new Font("Courier New", Font.PLAIN, 12));
 		setTitle("Tabela de livros");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 410);
@@ -69,6 +72,25 @@ public class TabelaLivros extends JFrame {
 		
 		
 		JButton btEditar = new JButton("Editar");
+		btEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int linhaSelecionada = tabela.getSelectedRow();
+
+				if (linhaSelecionada >= 0) {
+
+					linhaAlteracao = linhaSelecionada;
+					
+					
+					String nome = modeloTabela.getValueAt(linhaSelecionada, 0).toString();
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Caso queira alterar uma linha, selecione ela!");
+				}
+
+				
+			}
+		});
 		btEditar.setFont(new Font("Courier New", Font.BOLD, 15));
 		btEditar.setBounds(229, 326, 120, 23);
 		contentPane.add(btEditar);
@@ -80,7 +102,7 @@ public class TabelaLivros extends JFrame {
 				int linhaSelecionada = tabela.getSelectedRow();
 
 				if (linhaSelecionada >= 0) {
-
+										
 					modeloTabela.removeRow(linhaSelecionada);
 				} else {
 					JOptionPane.showMessageDialog(null, "Caso queira excluir uma linha, selecione ela!");
@@ -100,15 +122,15 @@ public class TabelaLivros extends JFrame {
 				
 			}
 		});
+		
 		btCadastrar.setFont(new Font("Courier New", Font.BOLD, 15));
 		btCadastrar.setBounds(67, 326, 120, 23);
 		contentPane.add(btCadastrar);
 		
-		tabela.setDefaultEditor(Object.class, null);
-		
-		
+		tabela.setDefaultEditor(Object.class, null);		
 		
 	}
+	
 	public void AdicionarLivros(Object[] infos) {
 		modeloTabela.addRow(infos);
 	}
