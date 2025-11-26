@@ -43,7 +43,6 @@ public class TabelaLivros extends JFrame {
 	 * Create the frame.
 	 */
 	public TabelaLivros() {
-		
 		setFont(new Font("Courier New", Font.PLAIN, 12));
 		setTitle("Tabela de livros");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,8 +67,7 @@ public class TabelaLivros extends JFrame {
 		tabela.setFont(new Font("Courier New", Font.PLAIN, 12));
 		scrollPane.setViewportView(tabela);	
 		
-		modeloTabela = (DefaultTableModel) tabela.getModel();
-		
+		modeloTabela = (DefaultTableModel) tabela.getModel();		
 		
 		JButton btEditar = new JButton("Editar");
 		btEditar.addActionListener(new ActionListener() {
@@ -80,9 +78,9 @@ public class TabelaLivros extends JFrame {
 				if (linhaSelecionada >= 0) {
 
 					linhaAlteracao = linhaSelecionada;
-					
-					
+
 					String nome = modeloTabela.getValueAt(linhaSelecionada, 0).toString();
+
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Caso queira alterar uma linha, selecione ela!");
