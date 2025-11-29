@@ -8,8 +8,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,6 +32,7 @@ public class TabelaLivros extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
 					TabelaLivros frame = new TabelaLivros();
 					frame.setVisible(true);
@@ -43,6 +47,7 @@ public class TabelaLivros extends JFrame {
 	 * Create the frame.
 	 */
 	public TabelaLivros() {
+		
 		setFont(new Font("Courier New", Font.PLAIN, 12));
 		setTitle("Tabela de livros");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,6 +58,8 @@ public class TabelaLivros extends JFrame {
 		contentPane.setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 23, 564, 285);
@@ -73,17 +80,18 @@ public class TabelaLivros extends JFrame {
 		btEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int linhaSelecionada = tabela.getSelectedRow();
+				boolean permitirEdicao = true;
 
-				if (linhaSelecionada >= 0) {
-
-					linhaAlteracao = linhaSelecionada;
-
-					String nome = modeloTabela.getValueAt(linhaSelecionada, 0).toString();
-
+				if (permitirEdicao == true) {
+					
+					TableCellEditor editorPadrao = new DefaultCellEditor(new JTextField());							
+					tabela.setDefaultEditor(Object.class, editorPadrao);
+					
 
 				} else {
+					
 					JOptionPane.showMessageDialog(null, "Caso queira alterar uma linha, selecione ela!");
+					tabela.setDefaultEditor(Object.class, null);	
 				}
 
 				
@@ -115,7 +123,8 @@ public class TabelaLivros extends JFrame {
 		btCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				TelaCadastro telaCadastro = new TelaCadastro();
+				TelaCadastro telaCadastro = new TelaCadastro ();
+				
 				telaCadastro.setVisible(true);
 				
 			}
