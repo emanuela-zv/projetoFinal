@@ -205,6 +205,7 @@ public class TelaCadastro extends JFrame {
 			tfTitulo.setText("");
 			tfAutor.setText("");
 			tfAnoLanc.setText("");
+			tfTitulo.requestFocus();
 			
 			statusLeitura.clearSelection();
 			cbIdade.setSelectedItem("Livre");
